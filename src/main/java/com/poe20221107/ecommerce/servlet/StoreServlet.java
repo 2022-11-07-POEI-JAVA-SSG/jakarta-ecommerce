@@ -2,6 +2,7 @@ package com.poe20221107.ecommerce.servlet;
 
 import com.poe20221107.ecommerce.model.Article;
 import com.poe20221107.ecommerce.model.Basket;
+import com.poe20221107.ecommerce.model.BasketItem;
 import com.poe20221107.ecommerce.model.Store;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ public class StoreServlet extends HttpServlet {
             }
             
             // affichage JSP
-            request.setAttribute("articles", basket.getArticles());
+            request.setAttribute("items", basket.getItems());
             request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
         } else {
              // affichage JSP
@@ -48,18 +49,31 @@ public class StoreServlet extends HttpServlet {
             // retrouver article
             Article article = store.findArticle(id);
             
-            // ajouter au panier
+            // recupetation Bsket dans la session
             Basket basket = (Basket)request.getSession().getAttribute("basket");
             if(basket == null){
                 basket = new Basket();           
             }
-            basket.addArticle(article);
+            
+            // chercher si l'article est deja dans le panier
+            BasketItem item = basket.getItem(id);
+            
+            // ajouter au panier
+            if(item == null) {
+                BasketItem newItem = new BasketItem();
+                newItem.setArticle(article);
+                newItem.setQuantity(1);
+                basket.addItem(newItem);
+            } else {
+               item.setQuantity(item.getQuantity()+1);
+            }
+           
             
             // sauvegarder le panier
             request.getSession().setAttribute("basket", basket);
 
             // affichage JSP
-            request.setAttribute("articles", basket.getArticles());
+            request.setAttribute("items", basket.getItems());
             request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
 
         }

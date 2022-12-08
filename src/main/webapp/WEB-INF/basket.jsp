@@ -14,8 +14,8 @@
        
         <h2>Contenu du panier</h2>
          <ul>
-            <c:forEach items="${articles}" var="article">
-                 <li> ${ article.name }
+            <c:forEach items="${items}" var="item">
+                 <li> ${ item.article.name } [${ item.quantity }]
             </c:forEach>             
          </ul>
          
