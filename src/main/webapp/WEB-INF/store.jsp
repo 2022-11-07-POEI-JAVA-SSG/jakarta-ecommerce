@@ -8,11 +8,17 @@
     </head>
     <body>
         <h1>Ecommerce</h1>
+        
+        <a href="store?showbasket=true">Afficher Mon Panier</a>
        
         <h2>Liste des articles</h2>
          <ul>
             <c:forEach items="${articles}" var="article">
-                 <li> ${ article.name }
+                <li> ${ article.name } 
+                     <form method="POST" action="store">
+                         <input type="hidden" name="articleid" value="${ article.id }"/>
+                         <input type="submit" value="Ajouter au Panier"/>
+                     </form>
             </c:forEach>             
          </ul>
          

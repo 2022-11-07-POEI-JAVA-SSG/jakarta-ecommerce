@@ -8,6 +8,9 @@
     </head>
     <body>
         <h1>Ecommerce</h1>
+        
+        
+        <a href="store">Retour au magasin</a>
        
         <h2>Contenu du panier</h2>
          <ul>

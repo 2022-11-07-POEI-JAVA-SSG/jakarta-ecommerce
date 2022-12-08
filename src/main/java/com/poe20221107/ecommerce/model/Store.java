@@ -2,7 +2,6 @@ package com.poe20221107.ecommerce.model;
 
 import java.util.ArrayList;
 
-
 public class Store {
     
     private ArrayList<Article> articles = new ArrayList<>();
@@ -26,4 +25,13 @@ public class Store {
         articles.add(article);
     }
     
+    public Article findArticle(int id){
+        
+        for(Article article : articles){
+            if(article.getId() == id){
+                return article;
+            }
+        }
+        return null;
+    }
 }
